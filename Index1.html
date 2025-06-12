@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>כפתורים צבעוניים</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-bar,
+    .footer-bar {
+      background-color: #6FD39C;
+      height: 2cm;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      position: relative;
+      padding-right: 20px;
+    }
+
+    .footer-bar {
+      justify-content: flex-start;
+      padding-left: 20px;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: white;
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+    }
+
+    .logo {
+      position: absolute;
+      left: 57.8px;
+      font-size: 24px;
+      font-weight: bold;
+      color: white;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 1cm 20px 40px;
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .button-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+      align-items: flex-start;
+      margin-top: 30px;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      position: relative;
+      width: 220px;
+    }
+
+    .button {
+      width: 100%;
+      padding: 15px 0;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      color: white;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .button:hover {
+      transform: scale(1.05);
+    }
+
+    .red { background-color: #e74c3c; }
+    .green { background-color: #2ecc71; }
+    .blue { background-color: #3498db; }
+    .orange { background-color: #e67e22; }
+    .purple { background-color: #9b59b6; }
+    .teal { background-color: #1abc9c; }
+
+    select, textarea {
+      font-size: 16px;
+      padding: 10px;
+      border-radius: 6px;
+      width: 100%;
+    }
+
+    textarea {
+      height: 80px;
+      resize: none;
+    }
+
+    .time-range {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      width: 100%;
+    }
+
+    img.flow-image {
+      width: 100%;
+      max-width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    #upload-label {
+      background-color: #34495e;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      width: 100%;
+      display: inline-block;
+      box-sizing: border-box;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      .button-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .button-group {
+        width: 90vw;
+      }
+
+      .button, select, textarea, #upload-label {
+        width: 100%;
+      }
+
+      img.flow-image {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header-bar">
+    <div class="logo">BOT4all</div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <h1>הכפתורים שלי</h1>
+
+    <div class="button-container">
+      <!-- Red -->
+      <div class="button-group">
+        <button class="button red">בחר מספר טלפון</button>
+        <select onchange="callNumber(this.value)">
+          <option value="">-- בחר מספר --</option>
+          <option value="tel:037687145">03-7687145</option>
+          <option value="tel:098748954">09-8748954</option>
+        </select>
+      </div>
+
+      <!-- Green -->
+      <div class="button-group">
+        <button class="button green">בחר ערוץ</button>
+        <select onchange="alertChannel(this.value)">
+          <option value="">-- בחר ערוץ --</option>
+          <option value="Telephone">טלפון</option>
+          <option value="WhatsApp">וואטסאפ</option>
+          <option value="Email">אימייל</option>
+          <option value="Instagram">אינסטגרם</option>
+          <option value="SMS">סמס</option>
+          <option value="Telegram">טלגרם</option>
+        </select>
+      </div>
+
+      <!-- Blue -->
+      <div class="button-group">
+        <button class="button blue">מהו משפט הפתיחה של העסק שלך?</button>
+        <textarea placeholder="כתוב כאן את משפט הפתיחה..."></textarea>
+      </div>
+
+      <!-- Orange -->
+      <div class="button-group">
+        <button class="button orange">שעות הפעילות בערוץ</button>
+        <div class="time-range">
+          <select id="fromTime">
+            <option value="">-- משעה --</option>
+            <option value="09:00">09:00</option>
+            <option value="10:00">10:00</option>
+            <option value="11:00">11:00</option>
+            <option value="12:00">12:00</option>
+          </select>
+          <select id="toTime">
+            <option value="">-- עד שעה --</option>
+            <option value="13:00">13:00</option>
+            <option value="14:00">14:00</option>
+            <option value="15:00">15:00</option>
+            <option value="16:00">16:00</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Purple -->
+      <div class="button-group">
+        <button class="button purple">הגדר את מהלך השיחה בבוט. לדוגמא</button>
+        <img src="https://svg.template.creately.com/iroelgak" alt="Bot Flow Example" class="flow-image">
+      </div>
+
+      <!-- Teal -->
+      <div class="button-group">
+        <button class="button teal">תוכן ומידע</button>
+        <label id="upload-label" for="fileUpload">טען מסמך</label>
+        <input type="file" id="fileUpload" accept=".pdf,.doc,.docx,.txt" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-bar">
+    <div class="footer-text">All rights reserved to Bot4all</div>
+  </div>
+
+  <!-- Script -->
+  <script>
+    function callNumber(number) {
+      if (number) {
+        window.location.href = number;
+      }
+    }
+
+    function alertChannel(channel) {
+      if (channel) {
+        alert("בחרת בערוץ: " + channel);
+      }
+    }
+
+    document.getElementById("fileUpload").addEventListener("change", function () {
+      if (this.files.length > 0) {
+        alert("הקובץ נטען: " + this.files[0].name);
+      }
+    });
+  </script>
+</body>
+</html>
